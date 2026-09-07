@@ -1,351 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Temporarily Deactivated</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ohho Cricket - Live Stream</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SMZXC121E6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  gtag('config', 'G-SMZXC121E6');
+</script>
+<style>
+html,body{
+margin:0;
+padding:0;
+background:#000;
+overflow:hidden;
+width:100%;
+height:100%;
+}
 
-    body {
-      min-height: 100vh;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.18), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.14), transparent 35%),
-        #070914;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      overflow-x: hidden;
-    }
+#main-iframe{
+width:100%;
+height:100%;
+border:none;
+display:block;
+position:absolute;
+top:0;
+left:0;
+}
 
-    .background-grid {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.18;
-      background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 45px 45px;
-      mask-image: linear-gradient(to bottom, black, transparent);
-    }
+.telegram-btn{
+position:absolute;
+top:15px;
+left:15px;
+z-index:9999;
+display:flex;
+align-items:center;
+gap:12px;
+background:linear-gradient(135deg,#1e88e5,#1565c0);
+padding:10px 16px;
+border-radius:14px;
+text-decoration:none;
+color:#fff;
+font-size:16px;
+font-weight:600;
+font-family:Arial,sans-serif;
+box-shadow:0 6px 18px rgba(0,0,0,0.5);
+}
 
-    .container {
-      width: 100%;
-      max-width: 680px;
-      position: relative;
-      z-index: 2;
-    }
+.telegram-icon{
+width:34px;
+height:34px;
+background:rgba(255,255,255,0.15);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+border:2px solid #fff;
+}
 
-    .card {
-      background: rgba(16, 19, 35, 0.78);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 28px;
-      padding: 42px;
-      text-align: center;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow:
-        0 30px 80px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.05);
-      animation: cardIn .7s ease-out;
-    }
+.telegram-icon svg{
+width:18px;
+height:18px;
+fill:#fff;
+}
 
-    @keyframes cardIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(245, 158, 11, .10);
-      border: 1px solid rgba(245, 158, 11, .22);
-      color: #fbbf24;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .3px;
-      margin-bottom: 28px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #f59e0b;
-      box-shadow: 0 0 14px #f59e0b;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .45; transform: scale(.75); }
-    }
-
-    .icon {
-      width: 92px;
-      height: 92px;
-      margin: 0 auto 25px;
-      border-radius: 26px;
-      display: grid;
-      place-items: center;
-      font-size: 42px;
-      background: linear-gradient(
-        145deg,
-        rgba(99,102,241,.22),
-        rgba(168,85,247,.14)
-      );
-      border: 1px solid rgba(129,140,248,.22);
-      box-shadow: 0 18px 45px rgba(99,102,241,.13);
-    }
-
-    h1 {
-      font-size: clamp(30px, 6vw, 46px);
-      line-height: 1.08;
-      letter-spacing: -1.8px;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #fff 20%, #c7d2fe 60%, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .subtitle {
-      max-width: 520px;
-      margin: 0 auto;
-      color: #a8afc4;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .notice {
-      margin-top: 30px;
-      padding: 20px;
-      border-radius: 18px;
-      text-align: left;
-      background: rgba(255,255,255,.035);
-      border: 1px solid rgba(255,255,255,.07);
-    }
-
-    .notice-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 15px;
-      font-weight: 750;
-      margin-bottom: 9px;
-    }
-
-    .notice-title span {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 9px;
-      background: rgba(245,158,11,.12);
-      color: #fbbf24;
-    }
-
-    .notice p {
-      color: #979fb7;
-      font-size: 14px;
-      line-height: 1.65;
-      padding-left: 38px;
-    }
-
-    .developer {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-align: left;
-      background: rgba(99,102,241,.07);
-      border: 1px solid rgba(129,140,248,.13);
-    }
-
-    .avatar {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 18px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      box-shadow: 0 8px 25px rgba(99,102,241,.25);
-    }
-
-    .developer-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .developer-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #737b94;
-      margin-bottom: 4px;
-    }
-
-    .developer-name {
-      color: #e8eaff;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .telegram {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 12px 17px;
-      border-radius: 13px;
-      text-decoration: none;
-      color: white;
-      font-size: 13px;
-      font-weight: 700;
-      background: #229ed9;
-      box-shadow: 0 8px 25px rgba(34,158,217,.18);
-      transition: .25s ease;
-    }
-
-    .telegram:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(34,158,217,.28);
-    }
-
-    .telegram svg {
-      width: 17px;
-      height: 17px;
-      fill: currentColor;
-    }
-
-    .footer {
-      margin-top: 28px;
-      color: #656d84;
-      font-size: 12px;
-    }
-
-    .footer strong {
-      color: #858da4;
-    }
-
-    @media (max-width: 560px) {
-      body {
-        padding: 15px;
-      }
-
-      .card {
-        padding: 30px 20px;
-        border-radius: 23px;
-      }
-
-      .developer {
-        align-items: flex-start;
-      }
-
-      .telegram {
-        padding: 10px 12px;
-      }
-
-      .telegram span {
-        display: none;
-      }
-
-      .notice p {
-        padding-left: 0;
-      }
-    }
-  </style>
+.error-msg{
+color:white;
+text-align:center;
+font-family:sans-serif;
+margin-top:20px;
+position:absolute;
+width:100%;
+top:50%;
+transform:translateY(-50%);
+}
+</style>
 </head>
 
 <body>
 
-  <div class="background-grid"></div>
+<a href="https://t.me/OhhoCricket" target="_blank" class="telegram-btn">
 
-  <main class="container">
-    <section class="card">
+<div class="telegram-icon">
+<svg viewBox="0 0 24 24">
+<path d="M9.993 15.674l-.398 5.604c.57 0 .817-.245 1.113-.54l2.67-2.557 5.53 4.047c1.014.558 1.734.264 1.987-.939l3.6-16.86.001-.001c.3-1.4-.506-1.95-1.496-1.58L1.27 9.64c-1.37.53-1.35 1.29-.233 1.64l5.68 1.77L19.29 5.73c.59-.39 1.13-.175.69.215"/>
+</svg>
+</div>
 
-      <div class="status">
-        <span class="status-dot"></span>
-        WEBSITE TEMPORARILY UNAVAILABLE
-      </div>
+<span>@Join OhhoCricket</span>
 
-      <div class="icon">
-        🔒
-      </div>
+</a>
 
-      <h1>Website Deactivated</h1>
+<iframe id="main-iframe" allowfullscreen allow="encrypted-media; fullscreen; autoplay"></iframe>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
 
-      <p class="subtitle">
-        This website has been temporarily stopped because the required
-        website fees have not been submitted or paid.
-      </p>
+const join = confirm("Join Our Telegram Channel");
 
-      <div class="notice">
-        <div class="notice-title">
-          <span>!</span>
-          Payment Required
-        </div>
+if(join){
+location.href = "https://t.me/OhhoCricket";
+}
 
-        <p>
-          Please complete the pending website fee payment to restore
-          access and continue using this website normally.
-        </p>
-      </div>
+const urlParams=new URLSearchParams(window.location.search);
+const id=urlParams.get('id');
+const iframe=document.getElementById('main-iframe');
 
-      <div class="developer">
+if(id){
+fetch('https://allrounderid2.pages.dev/id.json')
+.then(res=>res.json())
+.then(data=>{
+const targetData=data.iframes.find(item=>item.id===id);
+if(targetData && targetData.iframeSrc){
+iframe.src=targetData.iframeSrc;
 
-        <div class="avatar">A</div>
+if(targetData.hit){
+fetch(targetData.hit).catch(()=>{});
+}
 
-        <div class="developer-info">
-          <div class="developer-label">Website Developer</div>
-          <div class="developer-name">@arjunx18</div>
-        </div>
+}else{
+showError("Stream not found");
+}
+})
+.catch(()=>{
+showError("Error loading data");
+});
+}else{
+showError("No ID provided");
+}
 
-        <a
-          class="telegram"
-          href="https://t.me/arjunx18"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg viewBox="0 0 24 24">
-            <path d="M21.5 3.5 18.3 20c-.24 1.17-.86 1.46-1.75.91l-4.83-3.56-2.33 2.24c-.26.26-.48.48-.98.48l.35-4.92 8.95-8.08c.39-.35-.09-.54-.61-.19L6.04 13.7l-4.77-1.5c-1.04-.33-1.06-1.04.22-1.54L20.13 3.1c.87-.32 1.63.19 1.37.4Z"/>
-          </svg>
-          <span>Contact on Telegram</span>
-        </a>
+function showError(msg){
+const h2=document.createElement('h2');
+h2.className='error-msg';
+h2.innerText=msg;
+document.body.appendChild(h2);
+iframe.style.display='none';
+const badge=document.querySelector('.telegram-btn');
+if(badge) badge.style.display='none';
+}
 
-      </div>
-
-      <div class="footer">
-        For further information, please contact the <strong>website developer</strong>.
-      </div>
-
-    </section>
-  </main>
-
+});
+</script>
 </body>
 </html>
